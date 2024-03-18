@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: neo_bank
+    schema: NeoBank
+    tables:
+      - name: users
+      - name: notifications
+      - name: transactions
+      - name: devices
