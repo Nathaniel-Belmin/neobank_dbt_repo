@@ -17,6 +17,8 @@ sources:
             data_type: string
             description: The current state or condition of the notification (e.g., delivered, pending, failed)
           - name: user_id
+            tests:
+              - not_null
             data_type: string
             description: A unique identifier assigned to each user, allowing for the association of notifications with specific users
           - name: created_date
