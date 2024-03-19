@@ -5,6 +5,34 @@ sources:
     schema: NeoBank
     tables:
       - name: users
+        description: "A table of user data"
+        columns:
+         - name: user_id
+           description: "Uniquely identifies the user"
+           tests: 
+            - unique
+         - name: birth_year
+           description: "The user's birth year"
+         - name: country
+           description: "The user's country of residence"
+         - name: city
+           description: "The user's city of residence"
+         - name: created_date
+           description: "The date when the user's account was created"
+         - name: user_settings_crypto_unlocked
+           description: "Indicates if the user has unlocked the crypto currencies in the app"
+         - name: plan
+           description: "Indicates on which plan the user is on"
+         - name: attributes_notifications_marketing_push
+           description: "Indicates if the user has accepted to receive marketing push notifications"
+         - name: attributes_notifications_marketing_email
+           description: "Indicates if the user has accepted to receive marketing email notifications"
+         - name: num_contacts
+           description: "The number of contacts the user has in the neobank"
+         - name: num_referrals
+           description: "The number of users referred by the selected user"
+         - name: num_successful_referrals
+           description: "The number of users successfully referred by the selected user (successfully means users who have actually installed the app and are able to use the product)"
       - name: notifications
       - name: transactions
       - name: devices
