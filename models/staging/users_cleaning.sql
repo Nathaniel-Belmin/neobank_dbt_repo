@@ -31,7 +31,7 @@ CASE
     WHEN country = 'LU' THEN 'Luxembourg'
     WHEN country = 'BG' THEN 'Bulgarie' 
     WHEN country = 'BE' THEN 'Belgique'
-    WHEN country = "IT" THEN 'Italie'
+    WHEN country = 'IT' THEN 'Italie'
     WHEN country = 'JE' THEN 'Jersey'
     WHEN country = 'AU' THEN 'Australie'
     WHEN country = 'SK' THEN 'Slovaquie'
