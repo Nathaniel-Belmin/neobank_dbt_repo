@@ -6,5 +6,16 @@ sources:
     tables:
       - name: users
       - name: notifications
+        columns: 
+          - name: reason
+            description: A brief description or categorization of the purpose or nature of the notification 
+          - name: channel
+            description: The method or medium through which the notification was delivered to the user (e.g., email, SMS, push notification)
+          - name: status
+            description: The current state or condition of the notification (e.g., delivered, pending, failed)
+          - name: user_id
+            description: A unique identifier assigned to each user, allowing for the association of notifications with specific users
+          - name: created_date
+            description: The date and time when the notification was sent or created
       - name: transactions
       - name: devices
