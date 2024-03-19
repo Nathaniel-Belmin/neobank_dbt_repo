@@ -48,3 +48,13 @@ sources:
             data_type: timestamp
             description: datetime corresponding to the transactions created date
       - name: devices
+        columns:
+          - name: OS
+            data_type: string
+            description: string identifying the OS type use by the customer
+          - name: user_id
+            data_type: string
+            description: string uninquely identifying the user
+            tests:
+              - unique:
+                  column : 'user_id'
