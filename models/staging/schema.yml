@@ -7,4 +7,44 @@ sources:
       - name: users
       - name: notifications
       - name: transactions
+        columns:
+          - name: user_id
+            data_type: string
+            description: string uniquely identifying the user
+            tests:
+              - unique:
+                  column : "user_id"
+          - name: transaction_id
+            data_type: string
+            description: string uniquely identifying the transaction
+          - name: transactions_type
+            data_type: string
+            description: string indicating the type of the transaction
+          - name: transactions_currency
+            data_type: string
+            description: string indicating the currency of the transaction
+          - name: amount_usd
+            data_type: float
+            description: float corresponding to the transaction amount in USD
+          - name: transactions_state
+            data_type: string
+            description: string indicating the state of a transaction 
+          - name: card_holder_presence
+            data_type: string
+            description: string indicating if the card holder was present when the transaction happened
+          - name: merchant_mcc
+            data_type: float
+            description: float corresponding to the Merchant Category Code (MCC)
+          - name: merchant_city
+            data_type: string
+            description: string corresponding to the merchants city
+          - name: merchant_country
+            data_type: string
+            description: string corresponding to the merchants country
+          - name: transaction_direction
+            data_type: string
+            description: string indicating the direction of the transaction
+          - name: created_date
+            data_type: timestamp
+            description: datetime corresponding to the transactions created date
       - name: devices
