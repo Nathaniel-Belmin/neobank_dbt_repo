@@ -46,6 +46,24 @@ sources:
            description: "The number of users successfully referred by the selected user (successfully means users who have actually installed the app and are able to use the product)"
            data_type : integer
       - name: notifications
+        columns: 
+          - name: reason
+            data_type: string 
+            description: A brief description or categorization of the purpose or nature of the notification 
+          - name: channel
+            data_type: string
+            description: The method or medium through which the notification was delivered to the user (e.g., email, SMS, push notification)
+          - name: status
+            data_type: string
+            description: The current state or condition of the notification (e.g., delivered, pending, failed)
+          - name: user_id
+            tests:
+              - not_null
+            data_type: string
+            description: A unique identifier assigned to each user, allowing for the association of notifications with specific users
+          - name: created_date
+            data_type: date 
+            description: The date and time when the notification was sent or created
       - name: transactions
         columns:
           - name: user_id
