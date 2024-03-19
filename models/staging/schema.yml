@@ -5,6 +5,46 @@ sources:
     schema: NeoBank
     tables:
       - name: users
+        description: "A table of user data"
+        columns:
+         - name: user_id
+           description: "Uniquely identifies the user"
+           data_type : string
+           tests: 
+            - unique
+         - name: birth_year
+           description: "The user's birth year"
+           data_type : date
+         - name: country
+           description: "The user's country of residence"
+           data_type : string
+         - name: city
+           description: "The user's city of residence"
+           data_type : string
+         - name: created_date
+           description: "The date when the user's account was created"
+           data_type : date
+         - name: user_settings_crypto_unlocked
+           description: "Indicates if the user has unlocked the crypto currencies in the app"
+           data_type : boolean
+         - name: plan
+           description: "Indicates on which plan the user is on"
+           data_type : string
+         - name: attributes_notifications_marketing_push
+           description: "Indicates if the user has accepted to receive marketing push notifications"
+           data_type : string
+         - name: attributes_notifications_marketing_email
+           description: "Indicates if the user has accepted to receive marketing email notifications"
+           data_type : string
+         - name: num_contacts
+           description: "The number of contacts the user has in the neobank"
+           data_type : integer
+         - name: num_referrals
+           description: "The number of users referred by the selected user"
+           data_type : integer
+         - name: num_successful_referrals
+           description: "The number of users successfully referred by the selected user (successfully means users who have actually installed the app and are able to use the product)"
+           data_type : integer
       - name: notifications
       - name: transactions
         columns:
