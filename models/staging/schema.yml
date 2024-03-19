@@ -5,6 +5,46 @@ sources:
     schema: NeoBank
     tables:
       - name: users
+        description: "A table of user data"
+        columns:
+         - name: user_id
+           description: "Uniquely identifies the user"
+           data_type : string
+           tests: 
+            - unique
+         - name: birth_year
+           description: "The user's birth year"
+           data_type : date
+         - name: country
+           description: "The user's country of residence"
+           data_type : string
+         - name: city
+           description: "The user's city of residence"
+           data_type : string
+         - name: created_date
+           description: "The date when the user's account was created"
+           data_type : date
+         - name: user_settings_crypto_unlocked
+           description: "Indicates if the user has unlocked the crypto currencies in the app"
+           data_type : boolean
+         - name: plan
+           description: "Indicates on which plan the user is on"
+           data_type : string
+         - name: attributes_notifications_marketing_push
+           description: "Indicates if the user has accepted to receive marketing push notifications"
+           data_type : string
+         - name: attributes_notifications_marketing_email
+           description: "Indicates if the user has accepted to receive marketing email notifications"
+           data_type : string
+         - name: num_contacts
+           description: "The number of contacts the user has in the neobank"
+           data_type : integer
+         - name: num_referrals
+           description: "The number of users referred by the selected user"
+           data_type : integer
+         - name: num_successful_referrals
+           description: "The number of users successfully referred by the selected user (successfully means users who have actually installed the app and are able to use the product)"
+           data_type : integer
       - name: notifications
         columns: 
           - name: reason
@@ -25,4 +65,54 @@ sources:
             data_type: date 
             description: The date and time when the notification was sent or created
       - name: transactions
+        columns:
+          - name: user_id
+            data_type: string
+            description: string uniquely identifying the user
+            tests:
+              - unique:
+                  column : "user_id"
+          - name: transaction_id
+            data_type: string
+            description: string uniquely identifying the transaction
+          - name: transactions_type
+            data_type: string
+            description: string indicating the type of the transaction
+          - name: transactions_currency
+            data_type: string
+            description: string indicating the currency of the transaction
+          - name: amount_usd
+            data_type: float
+            description: float corresponding to the transaction amount in USD
+          - name: transactions_state
+            data_type: string
+            description: string indicating the state of a transaction 
+          - name: card_holder_presence
+            data_type: string
+            description: string indicating if the card holder was present when the transaction happened
+          - name: merchant_mcc
+            data_type: float
+            description: float corresponding to the Merchant Category Code (MCC)
+          - name: merchant_city
+            data_type: string
+            description: string corresponding to the merchants city
+          - name: merchant_country
+            data_type: string
+            description: string corresponding to the merchants country
+          - name: transaction_direction
+            data_type: string
+            description: string indicating the direction of the transaction
+          - name: created_date
+            data_type: timestamp
+            description: datetime corresponding to the transactions created date
       - name: devices
+        columns:
+          - name: OS
+            data_type: string
+            description: string identifying the OS type use by the customer
+          - name: user_id
+            data_type: string
+            description: string uninquely identifying the user
+            tests:
+              - unique:
+                  column : 'user_id'
