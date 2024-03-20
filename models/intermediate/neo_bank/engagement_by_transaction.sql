@@ -7,6 +7,7 @@ WITH user_transactions AS (
     FROM {{ ref('merge_users_transactions_devices') }}
     GROUP BY user_id
 ),
+--user lifetime equal the diff between account creation date and the date of the last transaction--
 user_lifetime AS (
     SELECT
         user_id,
@@ -14,10 +15,12 @@ user_lifetime AS (
     FROM user_transactions
     GROUP BY user_id
 ),
+--baseline is the median number of transactions across all users
 baseline AS (
     SELECT
         (SELECT APPROX_QUANTILES(num_transactions, 100)[OFFSET(50)] FROM user_transactions) AS median_transactions
 ),
+-- the engagement status of each user based on their lifetime and transaction count compared to the median --
 engagement_status AS (
     SELECT
         ul.user_id,
@@ -33,3 +36,10 @@ engagement_status AS (
 SELECT *
 FROM engagement_status
 ORDER BY lifetime_days DESC
+
+-- User Engagement Status = IF(Lifetime * Number of Transactions > Median Transactions, 'Engaged', 'Not Engaged')
+--Explanation:
+--Lifetime: The difference between the maximum and minimum transaction dates for a user, representing their lifetime in the system.
+--Number of Transactions: The count of distinct transactions for a user.
+--Median Transactions: The median number of transactions across all users.
+--If the product of Lifetime and Number of Transactions for a user is greater than the Median Transactions, the user is considered "Engaged", otherwise "Not Engaged".
