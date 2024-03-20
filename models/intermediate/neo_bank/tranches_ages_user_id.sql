@@ -3,7 +3,8 @@ WITH distinct_id AS (
 SELECT
   DISTINCT(user_id),
   birth_year
-FROM dbt-lewagon-project.dbt__intermediate.merge_users_transactions_devices)
+FROM {{ ref('merge_users_transactions_devices') }}
+)
 SELECT
   CASE
     WHEN 2019 - EXTRACT(YEAR FROM birth_year) BETWEEN 18 AND 24 THEN '18-24 ans'
@@ -16,4 +17,4 @@ SELECT
   COUNT(user_id) AS nombre_utilisateurs
 FROM distinct_id
 GROUP BY tranche_age
-ORDER BY tranche_age;
+ORDER BY tranche_age
