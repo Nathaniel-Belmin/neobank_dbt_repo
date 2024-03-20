@@ -1,19 +1,21 @@
 WITH user_transactions AS (
     SELECT
         user_id,
+        plan,
         COUNT(DISTINCT transaction_id) AS num_transactions,
         MAX(created_date_transaction) AS max_created_date,
         MIN(created_date_transaction) AS min_created_date
     FROM {{ ref('merge_users_transactions_devices') }}
-    GROUP BY user_id
+    GROUP BY user_id, plan
 ),
 
 user_lifetime AS (
     SELECT
         user_id,
+        plan,
         DATE_DIFF(MAX(max_created_date), MIN(min_created_date), MONTH) AS lifetime_months
     FROM user_transactions
-    GROUP BY user_id
+    GROUP BY user_id, plan
 ),
 
 baseline AS (
@@ -24,6 +26,7 @@ baseline AS (
 engagement_status AS (
     SELECT
         ul.user_id,
+        ul.plan,
         ul.lifetime_months,
         COALESCE(ut.num_transactions, 0) AS num_transactions,
         ROUND(SAFE_DIVIDE(num_transactions, lifetime_months), 2) as engagement_rate,
@@ -36,7 +39,7 @@ engagement_status AS (
 )
 SELECT *
 FROM engagement_status
-ORDER BY engagement_rate DESC
+ORDER BY plan, engagement_rate
 
 -- -- User Engagement Status = IF(Number of Transactions / Lifetime > Median Engagement Rate, 'Engaged', 'Not Engaged')
 --Explanation:
