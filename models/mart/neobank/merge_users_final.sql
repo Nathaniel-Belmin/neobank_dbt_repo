@@ -16,7 +16,6 @@ select
     er.total_amount_usd, 
     er.engagement_rate,
     er.amount_usd_per_lifetime,
-    er.engagement_status
 from
    {{ ref('users_cleaning') }} as u 
 inner join
