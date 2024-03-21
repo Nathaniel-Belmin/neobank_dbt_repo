@@ -32,7 +32,7 @@ engagement_status AS (
         COALESCE(ut.num_transactions, 0) AS num_transactions,
         COALESCE(ut.total_amount_usd, 0) AS total_amount_usd,
         ROUND(SAFE_DIVIDE(ut.num_transactions, ul.lifetime_months), 2) as engagement_rate,
-        ROUND(SAFE_DIVIDE(ut.total_amount_usd, ul.lifetime_months), 2) as value_rate,
+        ROUND(SAFE_DIVIDE(ut.total_amount_usd, ul.lifetime_months), 2) as amount_usd_per_lifetime,
         CASE
             WHEN SAFE_DIVIDE(ut.num_transactions, ul.lifetime_months) > (SELECT median_transactions FROM baseline) THEN 'Engaged'
             ELSE 'Not Engaged'
