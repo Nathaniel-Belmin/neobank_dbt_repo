@@ -2,7 +2,7 @@ WITH user_transactions AS (
     SELECT
         user_id,
         plan,
-        ROUND(SUM(CASE WHEN transactions_state = 'COMPLETED' THEN amount_usd ELSE 0 END),2) AS total_amount_usd,
+        ROUND(SUM(CASE WHEN transactions_state = 'COMPLETED' THEN amount_usd ELSE 0 END), 2) AS total_amount_usd,
         COUNT(DISTINCT transaction_id) AS num_transactions,
         MAX(created_date_transaction) AS max_created_date,
         MIN(created_date_transaction) AS min_created_date
@@ -32,6 +32,7 @@ engagement_status AS (
         COALESCE(ut.num_transactions, 0) AS num_transactions,
         COALESCE(ut.total_amount_usd, 0) AS total_amount_usd,
         ROUND(SAFE_DIVIDE(ut.num_transactions, ul.lifetime_months), 2) as engagement_rate,
+        ROUND(SAFE_DIVIDE(ut.total_amount_usd, ul.lifetime_months), 2) as value_rate,
         CASE
             WHEN SAFE_DIVIDE(ut.num_transactions, ul.lifetime_months) > (SELECT median_transactions FROM baseline) THEN 'Engaged'
             ELSE 'Not Engaged'
