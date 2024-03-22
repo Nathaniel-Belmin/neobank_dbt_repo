@@ -32,6 +32,8 @@ select
     transactions_type,
     transactions_currency,
     amount_usd,
+    CASE WHEN direction = 'OUTBOUND' THEN amount_usd ELSE 0 END AS montant_outbound,
+    CASE WHEN direction = 'INBOUND' THEN amount_usd ELSE 0 END AS montant_inbound,
     transactions_state,
     ea_cardholderpresence as card_holder_presence,
     ea_merchant_mcc as merchant_mcc,
