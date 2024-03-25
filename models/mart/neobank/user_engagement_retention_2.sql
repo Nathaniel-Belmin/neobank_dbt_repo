@@ -5,7 +5,7 @@ WITH prepare AS (
     DATE_TRUNC(MIN(created_date_transaction) OVER(PARTITION BY user_id), QUARTER) AS first_transaction_ever_quarter,
     DATE_TRUNC(MAX(created_date_transaction) OVER(PARTITION BY user_id), QUARTER) AS last_transaction_ever_quarter,
     COUNT(transaction_id) OVER(PARTITION BY user_id) AS nb_transaction_total,
-    SUM(amount_usd) OVER (PARTITION BY user_id) AS turnover_total,
+    SUM(amount_usd) OVER (PARTITION BY user_id) AS total_amount_usd,
     MAX(created_date_transaction) OVER() AS last_date_in_dataset
   FROM {{ ref('merge_users_transactions_devices') }}
 )
