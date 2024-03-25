@@ -11,7 +11,7 @@ SELECT
     MIN(created_date_account) AS client_creation_date,
     MIN(created_date_transaction) AS first_transaction_date,
     MAX(created_date_transaction) AS last_transaction_date,
-    ROUND(SUM(amount_usd), 2) AS amount_usd
+    ROUND(SUM(amount_usd), 2) AS amount_usd,
 FROM {{ ref('merge_users_transactions_devices') }}
     GROUP BY user_id , transactions_state, settings_crypto_unlocked, plan, attributes_notifications_marketing_push, attributes_notifications_marketing_email
 ),
@@ -33,7 +33,11 @@ SELECT
     last_transaction_date,
     EXTRACT( MONTH FROM last_transaction_date) AS last_transaction_month,
     EXTRACT( YEAR FROM last_transaction_date) AS last_transaction_year,
-    amount_usd
+    amount_usd,
+    CASE
+        WHEN last_transaction_date BETWEEN DATE('2018-01-01') AND DATE('2019-02-01') THEN 1
+        ELSE 0
+    END AS churner
 FROM groupby
 ),
 
@@ -52,7 +56,8 @@ SELECT
     CONCAT(first_transaction_year, '-M', first_transaction_month) AS first_transaction_year_month,
     last_transaction_date,
     CONCAT(last_transaction_year, '-M', last_transaction_month) AS last_transaction_year_month,
-    amount_usd
+    amount_usd,
+    churner
 FROM month_year
 )
 
@@ -115,5 +120,6 @@ SELECT
         WHEN last_transaction_year_month = '2019-M4' THEN 'P-Avril2019'
         WHEN last_transaction_year_month = '2019-M5' THEN 'Q-Mai2019'
     END AS last_transaction_yearmonth,
-    amount_usd
+    amount_usd,
+    churner
 FROM orderby
