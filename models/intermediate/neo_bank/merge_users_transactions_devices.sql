@@ -10,6 +10,8 @@ SELECT
     t.merchant_city,
     t.merchant_country,
     t.transaction_direction,
+    t.montant_inbound,
+    t.montant_outbound,
     t.created_date AS created_date_transaction,
     u.birth_year, 
     u.country,
