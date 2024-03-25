@@ -11,6 +11,7 @@ WITH prepare AS (
 )
 
 SELECT *,
-  DATE_DIFF(last_transaction_ever_month, first_transaction_ever_month, DAY) AS diff_last_to_first,
+  DATE_DIFF(last_transaction_ever_month, first_transaction_ever_month, MONTH) AS diff_last_to_first,
+  DATE_DIFF(created_date_transaction, first_transaction_ever_month, MONTH) AS month_nb,
   DATE_DIFF(last_date_in_dataset, last_transaction_ever_month, DAY) AS days_since_last_order
 FROM prepare
