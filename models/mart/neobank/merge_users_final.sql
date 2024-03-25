@@ -10,8 +10,13 @@ select
     u.attributes_notifications_marketing_email,
     u.attributes_notifications_marketing_push,
     u.num_contacts,
-    d.os,
-    er.plan,
+    d.os, 
+    CASE 
+    WHEN er.plan = "metal_free" then "metal"
+    WHEN er.plan = "premium_offer" then "premium"
+    WHEN er.plan = "premium_free" then "premium"
+    Else er.plan 
+    END,
     er.lifetime_months,
     er.num_transactions,
     er.total_amount_usd,
