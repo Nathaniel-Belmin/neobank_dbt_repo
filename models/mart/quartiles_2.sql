@@ -37,26 +37,26 @@ SELECT
     rt.user_id,
     rt.total_transaction_amount,
     CASE
-        WHEN rt.quartile_by_transaction_amount = 1 THEN '1'
-        WHEN rt.quartile_by_transaction_amount = 2 THEN '2'
-        WHEN rt.quartile_by_transaction_amount = 3 THEN '3'
-        WHEN rt.quartile_by_transaction_amount = 4 THEN '4'
+        WHEN rt.quartile_by_transaction_amount = 1 THEN 'A. 0 et 400'
+        WHEN rt.quartile_by_transaction_amount = 2 THEN 'B. 400 et 2171'
+        WHEN rt.quartile_by_transaction_amount = 3 THEN 'C. 2171 et 6970'
+        WHEN rt.quartile_by_transaction_amount = 4 THEN 'D. 6977 et 3206682'
         ELSE 'Unknown'
     END AS quartile_by_transaction_amount,
     rt.total_transactions,
     CASE
-        WHEN rt.quartile_by_transaction_count = 1 THEN '1'
-        WHEN rt.quartile_by_transaction_count = 2 THEN '2'
-        WHEN rt.quartile_by_transaction_count = 3 THEN '3'
-        WHEN rt.quartile_by_transaction_count = 4 THEN '4'
+        WHEN rt.quartile_by_transaction_count = 1 THEN 'A. 1 et 13'
+        WHEN rt.quartile_by_transaction_count = 2 THEN 'B. 13 et 50'
+        WHEN rt.quartile_by_transaction_count = 3 THEN 'C. 50 et 143'
+        WHEN rt.quartile_by_transaction_count = 4 THEN 'D. 143 et 4996'
         ELSE 'Unknown'
     END AS quartile_by_transaction_count,
     lq.lifetime_month,
     CASE 
-        WHEN lq.lifetime_quartile = 1 THEN '1'
-        WHEN lq.lifetime_quartile = 2 THEN '2'
-        WHEN lq.lifetime_quartile = 3 THEN '3'
-        WHEN lq.lifetime_quartile = 4 THEN '4'
+        WHEN lq.lifetime_quartile = 1 THEN 'A. 0 et 4'
+        WHEN lq.lifetime_quartile = 2 THEN 'B. 4 et 7 '
+        WHEN lq.lifetime_quartile = 3 THEN 'C. 7 et 10'
+        WHEN lq.lifetime_quartile = 4 THEN 'D. 10 et 16'
         ELSE 'Unknown'
     END AS lifetime_quartile
 FROM
